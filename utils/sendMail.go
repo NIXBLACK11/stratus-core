@@ -13,21 +13,19 @@ import (
 	"io"
 )
 
-func SendMail(successChan chan bool, receiver string, ProjectName string, SiteName string, SiteURL string, Trigger string) {
+func SendMail(receiver string, ProjectName string, SiteName string, SiteURL string, Trigger string) bool {
 	EMAIL_SENDER := os.Getenv("EMAIL_SENDER")
 	EMAIL_PASSWORD := os.Getenv("EMAIL_PASSWORD")
 
 	if EMAIL_SENDER == "" || EMAIL_PASSWORD == "" {
 		fmt.Println("Unable to configure email credentials")
-		successChan<-false
+		return false
 	}
 
 	from := EMAIL_SENDER
 	password := EMAIL_PASSWORD
 
-	to := []string{
-		receiver,
-	}
+	to := []string{receiver}
 
 	smtpHost := "smtp.gmail.com"
 	smtpPort := "587"
@@ -79,14 +77,14 @@ func SendMail(successChan chan bool, receiver string, ProjectName string, SiteNa
 
 	imageFile, err := os.Open(imagePath)
 	if err != nil {
-		successChan<-false
+		return false
 	}
 	defer imageFile.Close()
 
 	encoder := base64.NewEncoder(base64.StdEncoding, imagePart)
 	_, err = io.Copy(encoder, imageFile)
 	if err != nil {
-		successChan<-false
+		return false
 	}
 	encoder.Close()
 
@@ -95,9 +93,9 @@ func SendMail(successChan chan bool, receiver string, ProjectName string, SiteNa
 	err = smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, body.Bytes())
 	if err != nil {
 		fmt.Println(err)
-		successChan<-false
+		return false
 	}
 
 	fmt.Println("Email sent successfully")
-	successChan<-true
+	return true
 }

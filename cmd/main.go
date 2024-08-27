@@ -1,39 +1,22 @@
 package main
 
 import (
-	// "stratus-core/database"
-	"fmt"
-	"stratus-core/utils"
-	"time"
+	"log"
+	"stratus-core/database"
+	"stratus-core/schedulers"
+
+	"github.com/fatih/color"
 )
 
 func main() {
-	// err := database.InitMongoDB()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	successChan := make(chan bool)
-
-	go utils.SendMail(
-		successChan,
-		"siddharthsinghrana11@gmail.com",
-		"test project",
-		"test site",
-		"https://www.site.com",
-		"501",
-	)
-
-	for {
-		fmt.Println("Hello")
-		time.Sleep(time.Second*5)
+	err := database.InitMongoDB()
+	if err != nil {
+		color.Red("Error in mongo connection")
+		log.Fatal(err)
 	}
 
-	success:=<-successChan
-	if success==true {
-		fmt.Println("sent successfully")
-	} else {
-		fmt.Println("not sent") 
-	}
+	color.Green("Starting stratus health checker...")
 
+	schedulers.UpdateProjects()
+	schedulers.CheckStatus()
 }

@@ -1,0 +1,41 @@
+// successChan := make(chan bool)
+
+	// go utils.SendMail(
+	// 	successChan,
+	// 	"siddharthsinghrana11@gmail.com",
+	// 	"test project",
+	// 	"test site",
+	// 	"https://www.site.com",
+	// 	"501",
+	// )
+
+	// for {
+	// 	fmt.Println("Hello")
+	// 	time.Sleep(time.Second*5)
+	// }
+
+	// success:=<-successChan
+	// if success==true {
+	// 	fmt.Println("sent successfully")
+	// } else {
+	// 	fmt.Println("not sent") 
+	// }
+	projects, err := database.GetProjects()
+	if err!=nil {
+		log.Fatal(err)
+	}
+
+	for _, project := range projects {
+		fmt.Println(project.UserName)
+		fmt.Println(project.ProjectName)
+		for _, alert := range project.AlertTriggers {
+			fmt.Println("------------------------------")
+			fmt.Println(alert.SiteName)
+			fmt.Println(alert.SiteUrl)
+			fmt.Println(alert.AlertType)
+			// for _, type := range alert.AlertType {
+			// 	fmt.Println(type)
+			// }
+		}
+		fmt.Println("------------------------------")
+	}
