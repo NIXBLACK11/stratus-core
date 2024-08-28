@@ -8,6 +8,7 @@ type AlertTrigger struct {
 
 type Project struct {
 	UserName string `json:"username"`
+	Tries int `json:"tries"`
 	ProjectName string `json:"projectname"`
 	AlertTriggers []AlertTrigger `bson:"alerttriggers"` 
 }

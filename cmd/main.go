@@ -17,6 +17,6 @@ func main() {
 
 	color.Green("Starting stratus health checker...")
 
-	schedulers.UpdateProjects()
+	go schedulers.UpdateProjects()
 	schedulers.CheckStatus()
 }

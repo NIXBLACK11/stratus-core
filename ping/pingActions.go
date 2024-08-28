@@ -9,20 +9,28 @@ import (
 
 func isWebsiteUnreachable(url string) bool {
     client := http.Client{
-        Timeout: 5 * time.Second,
+        Timeout: 10 * time.Second,
     }
     resp, err := client.Get(url)
-    if err != nil || resp.StatusCode != http.StatusOK {
+    if err != nil {
         return true
     }
-    return false
+    defer resp.Body.Close()
+
+    if resp.StatusCode>=200 && resp.StatusCode<400 {
+        return false
+    }
+
+    return true
 }
 
 func isSSLCertificateExpiring(url string) bool {
     conn, err := tls.Dial("tcp", url+":443", nil)
     if err != nil {
-        return true
+        return false
     }
+    defer conn.Close()
+
     expiry := conn.ConnectionState().PeerCertificates[0].NotAfter
     daysUntilExpiry := expiry.Sub(time.Now()).Hours() / 24
     return daysUntilExpiry < 30 // Alert if SSL certificate expires in less than 30 days
@@ -46,9 +54,16 @@ func hasBrokenLinks(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    if err != nil || resp.StatusCode == http.StatusNotFound {
+    defer resp.Body.Close()
+
+    if err != nil {
+        return false
+    }
+
+    if resp.StatusCode == http.StatusNotFound {
         return true
     }
+
     return false
 }
 
@@ -57,9 +72,16 @@ func isInternalServerError(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    if err != nil || resp.StatusCode == http.StatusInternalServerError {
+    defer resp.Body.Close()
+
+    if err != nil {
+        return false
+    }
+
+    if resp.StatusCode == http.StatusInternalServerError {
         return true
     }
+
     return false
 }
 
@@ -68,9 +90,16 @@ func hasUnauthorizedAccess(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    if err != nil || resp.StatusCode == http.StatusUnauthorized {
+    defer resp.Body.Close()
+
+    if err != nil {
+        return false
+    }
+
+    if resp.StatusCode == http.StatusUnauthorized {
         return true
     }
+
     return false
 }
 
@@ -79,7 +108,8 @@ func isDNSResolutionIssue(url string) bool {
         Timeout: 5 * time.Second,
     }
     _, err := client.Get(url)
-    if strings.Contains(err.Error(), "no such host") {
+
+    if err!=nil && strings.Contains(err.Error(), "no such host") {
         return true
     }
     return false
@@ -90,9 +120,16 @@ func isServiceUnavailable(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    if err != nil || resp.StatusCode == http.StatusServiceUnavailable {
+    defer resp.Body.Close()
+
+    if err != nil {
+        return false
+    }
+
+    if resp.StatusCode == http.StatusServiceUnavailable {
         return true
     }
+
     return false
 }
 

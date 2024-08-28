@@ -5,21 +5,23 @@ import (
 	"encoding/base64"
 	"fmt"
 	"html/template"
+	"io"
 	"mime/multipart"
 	"net/smtp"
 	"net/textproto"
 	"os"
 	"path/filepath"
-	"io"
+
+	"github.com/fatih/color"
 )
 
-func SendMail(receiver string, ProjectName string, SiteName string, SiteURL string, Trigger string) bool {
+func SendMail(receiver string, ProjectName string, SiteName string, SiteURL string, Trigger string) {
 	EMAIL_SENDER := os.Getenv("EMAIL_SENDER")
 	EMAIL_PASSWORD := os.Getenv("EMAIL_PASSWORD")
 
 	if EMAIL_SENDER == "" || EMAIL_PASSWORD == "" {
-		fmt.Println("Unable to configure email credentials")
-		return false
+		color.Red("Unable to configure email credentials")
+		return
 	}
 
 	from := EMAIL_SENDER
@@ -77,14 +79,16 @@ func SendMail(receiver string, ProjectName string, SiteName string, SiteURL stri
 
 	imageFile, err := os.Open(imagePath)
 	if err != nil {
-		return false
+		color.Red(err.Error())
+		return
 	}
 	defer imageFile.Close()
 
 	encoder := base64.NewEncoder(base64.StdEncoding, imagePart)
 	_, err = io.Copy(encoder, imageFile)
 	if err != nil {
-		return false
+		color.Red(err.Error())
+		return
 	}
 	encoder.Close()
 
@@ -92,10 +96,9 @@ func SendMail(receiver string, ProjectName string, SiteName string, SiteURL stri
 
 	err = smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, body.Bytes())
 	if err != nil {
-		fmt.Println(err)
-		return false
+		color.Red(err.Error())
+		return
 	}
 
-	fmt.Println("Email sent successfully")
-	return true
+	color.Green("Email sent successfully")
 }

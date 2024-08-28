@@ -20,6 +20,7 @@ func UpdateProjects() {
 			newProjects, err := database.GetProjects()
 			if err!=nil {
 				color.Magenta("Unable to read DB, retrying in 3 minutes!!")
+				time.Sleep(time.Minute * 3)
 			} else {
 				mu.Lock()
 				projects = newProjects
@@ -27,6 +28,6 @@ func UpdateProjects() {
 				success = true
 			}
 		}
-		time.Sleep(time.Hour * 3)
+		time.Sleep(time.Hour * 24)
 	}
 }
