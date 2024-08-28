@@ -54,11 +54,11 @@ func hasBrokenLinks(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    defer resp.Body.Close()
-
+    
     if err != nil {
         return false
     }
+    defer resp.Body.Close()
 
     if resp.StatusCode == http.StatusNotFound {
         return true
@@ -72,11 +72,11 @@ func isInternalServerError(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    defer resp.Body.Close()
-
+    
     if err != nil {
         return false
     }
+    defer resp.Body.Close()
 
     if resp.StatusCode == http.StatusInternalServerError {
         return true
@@ -90,11 +90,11 @@ func hasUnauthorizedAccess(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    defer resp.Body.Close()
-
+    
     if err != nil {
         return false
     }
+    defer resp.Body.Close()
 
     if resp.StatusCode == http.StatusUnauthorized {
         return true
@@ -120,11 +120,11 @@ func isServiceUnavailable(url string) bool {
         Timeout: 5 * time.Second,
     }
     resp, err := client.Get(url)
-    defer resp.Body.Close()
-
+    
     if err != nil {
         return false
     }
+    defer resp.Body.Close()
 
     if resp.StatusCode == http.StatusServiceUnavailable {
         return true
