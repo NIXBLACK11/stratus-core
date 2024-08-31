@@ -26,7 +26,14 @@ Suitable for monitoring multiple websites and services with support for numerous
 - ```ServiceUnavailable```
 
 ## How to use the cli:
-1. Download the stratus tool [link](https://github.com/NIXBLACK11/stratus-cli/blob/main/stratus)
+1. Download the stratus tool
+- For linux [link](https://github.com/NIXBLACK11/stratus-cli/releases/tag/v1.0)
+- In case of other operating systems build using
+    ```
+    git clone https://github.com/NIXBLACK11/stratus-cli.git
+    cd stratus-cli
+    go build -o stratus
+    ```
 2.  ```bash
     mv stratus /usr/local/bin
     ```
