@@ -25,12 +25,12 @@ Stratus is a monitoring tool that allows users to set up various triggers for th
 2.  ```bash
     mv stratus /usr/local/bin
     ```
-3. Example usage
+3. Example usage:
     - stratus signup
     - stratus login
+    - stratus add config.st
     - stratus project projectName
     - stratus delete projectName
-    - stratus add config.st
 
 ## Layout of configuration file
 ```js
