@@ -52,3 +52,6 @@ ALERTTYPE BrokenLinks, ServiceUnavailable, ServerResponseTimeHigh
 Note: 
 - Tries defines the number of times the user is notified in a day in case of trigger.
 - The email will be sent to the email with which you sign with.
+
+[stratus-api](https://github.com/NIXBLACK11/stratus-api)
+[stratus-cli](https://github.com/NIXBLACK11/stratus-cli)
