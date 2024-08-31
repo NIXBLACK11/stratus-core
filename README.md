@@ -21,7 +21,7 @@ Stratus is a monitoring tool that allows users to set up various triggers for th
 - ```ServiceUnavailable```
 
 ## How to use the cli:
-1. Download the stratus tool [link]()
+1. Download the stratus tool [link](https://github.com/NIXBLACK11/stratus-cli/blob/main/stratus)
 2.  ```bash
     mv stratus /usr/local/bin
     ```
