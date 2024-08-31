@@ -37,12 +37,20 @@ Suitable for monitoring multiple websites and services with support for numerous
 2.  ```bash
     mv stratus /usr/local/bin
     ```
-3. Example usage:
-    - stratus signup
-    - stratus login
-    - stratus add config.st
-    - stratus project projectName
-    - stratus delete projectName
+3. Usage:
+
+    ```
+    stratus help
+
+    Usage:
+        help                         Show available commands and options.
+        login                        Login to your account
+        signup                       Create a new account
+        projects                     List all projects in your account.
+        project <project_name>       View and manage urls monitored in a specific project.
+        delete <project_name>        Delete the prject specified
+        add <config.st>              Add details to an existing or create a new project
+    ```
 
 ## Layout of configuration file
 ```js
