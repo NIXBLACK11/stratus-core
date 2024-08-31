@@ -3,11 +3,16 @@
 Stratus is a monitoring tool that allows users to set up various triggers for their websites and receive email alerts whenever errors or issues occur. The tool is designed to help developers and website administrators stay informed about the health and performance of their sites.
 
 ## Features
-1. ### Customizable Triggers: Set up specific triggers to monitor various aspects of your website, such as response codes, SSL certificate status, server response time, and more.
-2. ### Real-time Alerts: Receive immediate email notifications when an issue is detected based on the triggers you've configured.
-3. ### Detailed Reporting: Email alerts include detailed information about the error, such as the project name, site name, site URL, and the specific trigger that was activated.
-4. ### Easy Integration: Integrate Stratus into your existing workflow with minimal setup and configuration.
-5. ### Scalable: Suitable for monitoring multiple websites and services with support for numerous triggers.
+### Customizable Triggers: 
+Set up specific triggers to monitor various aspects of your website, such as response codes, SSL certificate status, server response time, and more.
+### Real-time Alerts: 
+Receive immediate email notifications when an issue is detected based on the triggers you've configured.
+### Detailed Reporting: 
+Email alerts include detailed information about the error, such as the project name, site name, site URL, and the specific trigger that was activated.
+### Easy Integration: 
+Integrate Stratus into your existing workflow with minimal setup and configuration.
+### Scalable: 
+Suitable for monitoring multiple websites and services with support for numerous triggers.
 
 ## Supported trigger types include:
 
