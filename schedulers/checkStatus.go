@@ -27,8 +27,8 @@ func CheckStatus() {
 			}
 		} else {
 			mu.Unlock() // Unlock before the sleep
-			color.Red("Projects is empty, retrying after 3 minutes!!")
-			time.Sleep(time.Minute * 3)
+			color.Red("Projects is empty, retrying after 3 hours!!")
+			time.Sleep(time.Hour * 3)
 		}
 	}
 }
