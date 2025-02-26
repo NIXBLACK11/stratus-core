@@ -2,6 +2,11 @@
 
 Stratus is a monitoring tool that allows users to set up various triggers for their websites and receive email alerts whenever errors or issues occur. The tool is designed to help developers and website administrators stay informed about the health and performance of their sites.
 
+## Repositories  
+- [**stratus-api**](https://github.com/NIXBLACK11/stratus-api) – API for updating user profiles (**Golang**)  
+- [**stratus-cli**](https://github.com/NIXBLACK11/stratus-cli) – CLI tool for accessing the API (**Golang**)  
+- [**stratus-frontend**](https://github.com/NIXBLACK11/stratus-frontend) – Frontend for interacting with the API (**React**)  
+
 ## Features
 ### Customizable Triggers: 
 Set up specific triggers to monitor various aspects of your website, such as response codes, SSL certificate status, server response time, and more.
